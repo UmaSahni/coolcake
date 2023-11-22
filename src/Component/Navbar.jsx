@@ -1,0 +1,76 @@
+// Navbar.js
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import {
+  Box,
+  Flex,
+  Spacer,
+  Heading,
+  Button,
+  IconButton,
+  Collapse,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useMediaQuery } from '@chakra-ui/react'
+const Navbar = () => {
+  const { isOpen, onToggle } = useDisclosure();
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+
+  return (
+    <Box bg="teal.500" p={4}>
+      <Flex alignItems="center">
+        <Heading color="white" size="md">
+          My App
+        </Heading>
+        <Spacer />
+        {isLargerThan768 ? (
+          <Box>
+            <NavLink  to="/home" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+              Home
+            </NavLink>
+
+            <NavLink  to="/admin" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+              Admin
+            </NavLink>
+
+            {/* Add more NavLink components for other pages */}
+            <Button colorScheme="whiteAlpha" variant="outline">
+             <Link to="/login" >Sign In </Link> 
+            </Button>
+
+            <Button colorScheme="whiteAlpha" variant="outline">
+             <Link to="/signup" >Sign Up </Link> 
+            </Button>
+          </Box>
+        ) : (
+          <Flex>
+            <IconButton
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              variant="outline"
+              colorScheme="whiteAlpha"
+              onClick={onToggle}
+              aria-label="Toggle Navigation"
+              mr={2}
+            />
+          </Flex>
+        )}
+      </Flex>
+      {!isLargerThan768 && (
+        <Collapse in={isOpen}>
+          <Box mt={4}>
+            <NavLink to="/home" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
+              Home
+            </NavLink>
+            {/* Add more NavLink components for other pages */}
+            <Button mt={2} colorScheme="whiteAlpha" variant="outline">
+              Sign In
+            </Button>
+          </Box>
+        </Collapse>
+      )}
+    </Box>
+  );
+};
+
+export default Navbar;
