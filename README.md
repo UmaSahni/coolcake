@@ -9,3 +9,6 @@
  - npm i redux
  - npm i redux-thunk
 - npm install react-hot-toast
+
+
+//https://cdn.igp.com/f_auto,q_auto,t_pnopt12prodlp/products/

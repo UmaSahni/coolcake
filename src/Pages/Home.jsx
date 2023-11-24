@@ -1,13 +1,18 @@
-import { Center, Heading } from "@chakra-ui/react";
+import { Box, Center, Divider, Heading } from "@chakra-ui/react";
 import React from "react";
-import Navbar from "../Component/Navbar";
+import Hero from "../Component/Hero";
+import Category from "../Component/Category";
+
+
+
 
 const Home = () => {
   return (
     <div>
-      <Center>
-        <Heading>Welcome to cool cake 🎂</Heading>
-      </Center>
+       <Hero/>
+      
+     <Category/>
+     
       
     </div>
   );

@@ -1,3 +1,4 @@
+import Footer from "./Component/Footer";
 import Navbar from "./Component/Navbar";
 import Home from "./Pages/Home";
 import MainRoutes from "./Routes/MainRoutes";
@@ -7,7 +8,7 @@ function App() {
     <div>
        <Navbar/>
      <MainRoutes/>
-    
+    <Footer/>
     </div>
   );
 }

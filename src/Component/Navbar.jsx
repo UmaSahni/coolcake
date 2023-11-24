@@ -18,11 +18,13 @@ const Navbar = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   return (
-    <Box bg="teal.500" p={4}>
+    <Box bg="#7f5539" p={4}>
       <Flex alignItems="center">
+        <Link to="/home" >
         <Heading color="white" size="md">
-          My App
+          Cool Cake
         </Heading>
+        </Link>
         <Spacer />
         {isLargerThan768 ? (
           <Box>
