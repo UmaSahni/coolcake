@@ -1,4 +1,5 @@
 'use client'
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
   Flex,
@@ -28,8 +29,12 @@ export default function Login() {
   const dispatch = useDispatch()
   const store = useSelector((store)=>store.AuthReducer)
   const handleSubmit = () => {
+    // loading message
+
+   
     
     dispatch(login({email, password}))
+
     console.log(email, password)
     
   }
@@ -40,6 +45,7 @@ console.log(store)
       align={'center'}
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
+        <Toaster/>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>

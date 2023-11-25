@@ -36,6 +36,11 @@ const Navbar = () => {
               Admin
             </NavLink>
 
+              <NavLink  to="/product" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+              Product
+            </NavLink>
+
+
             {/* Add more NavLink components for other pages */}
             <Button colorScheme="whiteAlpha" variant="outline">
              <Link to="/login" >Sign In </Link> 
@@ -63,6 +68,9 @@ const Navbar = () => {
           <Box mt={4}>
             <NavLink to="/home" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
               Home
+            </NavLink>
+            <NavLink to="/product" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
+              Product
             </NavLink>
             {/* Add more NavLink components for other pages */}
             <Button mt={2} colorScheme="whiteAlpha" variant="outline">
