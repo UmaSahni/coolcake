@@ -19,6 +19,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../apiEndPoints";
 import toast, { Toaster } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
+import { addProduct } from "../Redux/ProductReducer/action";
 
 const initialState = {
   name: "",
@@ -31,35 +33,20 @@ const initialState = {
 };
 
 const AddProduct = () => {
+  
   const [cake, setCake] = useState(initialState);
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCake(pre=>({...cake, [name]:value}))
+    setCake(pre=>({...pre, [name]:value}))
   };
+  const dispatch = useDispatch()
+ 
   const handleSubmit = (e) => {
-    
-    e.preventDefault();
-    
-    // Display loading notification
-    const loadingnoti = toast.loading("...loading")
-    axios.post(`${BASE_URL}/cakes`, cake)
-    .then((res)=>{
-    // Close the loading notification
-    toast.dismiss(loadingnoti)
 
-    // Display success notification
-    toast.success(<b>Added successful!</b>)
-        console.log(res)
-    })
-    .catch((err)=>{
-      toast.dismiss(loadingnoti)
-      
-    // Display error notification
-    toast.error(<b>Unable to add product. Please try later.</b>);
-        console.err(err, "Error in Addproduct")
-    })
-    setCake(initialState)
-    console.log(cake)
+    e.preventDefault();
+    dispatch(addProduct(cake))
+    
   };
 
 
