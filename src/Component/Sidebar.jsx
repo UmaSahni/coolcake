@@ -1,12 +1,12 @@
 import { Box, Checkbox, HStack, Radio, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+
 
 const Sidebar = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
-  let location = useLocation();
-  let [category, setCategory] = useState([]);
+  let [searchParams, setSearchParams] = useSearchParams(); // This is a way were you have variable that you can not skip then you can use undersore
+
+  let [category, setCategory] = useState( searchParams.getAll("category")  || []);
 
   // console.log(location)
 
@@ -35,13 +35,13 @@ const Sidebar = () => {
           Filter By
         </Text>
         <VStack align={'left'}>
-          <Checkbox value="Chocolate" onChange={handleChange}>
+          <Checkbox isChecked={category.includes("Chocolate")} value="Chocolate" onChange={handleChange}>
             Chocolate Cake
           </Checkbox>
-          <Checkbox value="special" onChange={handleChange}>
+          <Checkbox isChecked={category.includes("special")} value="special" onChange={handleChange}>
             Special Cake
           </Checkbox>
-          <Checkbox value="cream" onChange={handleChange}>
+          <Checkbox isChecked={category.includes("cream")} value="cream" onChange={handleChange}>
             Cream Cake
           </Checkbox>
         </VStack>

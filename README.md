@@ -12,3 +12,5 @@
 
 
 //https://cdn.igp.com/f_auto,q_auto,t_pnopt12prodlp/products/
+
+let [_, setSearchParams] = useSearchParams(); // This is a way were you have variable that you can not skip then you can use undersore

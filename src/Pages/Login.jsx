@@ -21,6 +21,7 @@ import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../Redux/AuthReducer/action'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -28,12 +29,14 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const store = useSelector((store)=>store.AuthReducer)
+  const navigate = useNavigate()
+  const location = useLocation()
   const handleSubmit = () => {
     // loading message
 
    
     
-    dispatch(login({email, password}))
+    dispatch(login({email, password})).then((res)=>navigate(location.state, {replace:true}))
 
     console.log(email, password)
     
