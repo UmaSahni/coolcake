@@ -1,4 +1,4 @@
-import { Box, Checkbox, HStack, Radio, Text, VStack } from '@chakra-ui/react';
+import { Box, Checkbox, HStack, Radio, RadioGroup, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ const Sidebar = () => {
   let [searchParams, setSearchParams] = useSearchParams(); // This is a way were you have variable that you can not skip then you can use undersore
 
   let [category, setCategory] = useState( searchParams.getAll("category")  || []);
+  let [sort, setSort] = useState(searchParams.get("order"|| ""))
 
   // console.log(location)
 
@@ -21,11 +22,20 @@ const Sidebar = () => {
     }
   };
 
+  // Sort
+
+  const handleClick = (e) =>{
+    // setSort(e.target.value)
+  }
+
   useEffect(() => {
     let params = { category };
     // console.log(params, "This is params");
+
+    // Check sort is present or not other wise it will show sort=
+    sort && (params.order = sort)
     setSearchParams(params);
-  }, [category]);
+  }, [category, sort]);
 
   return (
     <div>
@@ -52,10 +62,12 @@ const Sidebar = () => {
         <Text align={'center'} fontWeight={'bold'}>
           Sort By
         </Text>
-        <VStack align={'left'}>
-          <Radio value="asc">Low to high</Radio>
-          <Radio value="desc">High to low</Radio>
+          <RadioGroup onChange={setSort} value={sort} >
+        <VStack  align={'left'}>
+          <Radio name="order" value="asc">Low to high</Radio>
+          <Radio name="order" value="desc">High to low</Radio>
         </VStack>
+          </RadioGroup>
       </Box>
     </div>
   );

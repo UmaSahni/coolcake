@@ -46,6 +46,8 @@ const SingleProduct = () => {
 
   const data = ProductReducer && ProductReducer.products || [];
 
+  console.log(data)
+
   // Check if data exists before destructuring its properties
   const {
     category,

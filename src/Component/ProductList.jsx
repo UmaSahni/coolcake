@@ -27,7 +27,10 @@ const ProductList = () => {
     params : {
       category:searchParams.getAll("category"),
      _limit:6,
-      _page : page
+      _page : page,
+      // Sort
+      _sort:"price.mrp_inr",
+      _order:searchParams.get("order")
     }
   }
 
