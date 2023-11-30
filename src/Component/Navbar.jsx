@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <Box bg="#7f5539" p={4}>
       <Flex alignItems="center">
-        <Link to="/home" >
+        <Link to="/" >
         <Heading color="white" size="md">
           Cool Cake
         </Heading>
@@ -28,7 +28,7 @@ const Navbar = () => {
         <Spacer />
         {isLargerThan768 ? (
           <Box>
-            <NavLink  to="/home" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+            <NavLink  to="/" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
               Home
             </NavLink>
 
@@ -66,7 +66,7 @@ const Navbar = () => {
       {!isLargerThan768 && (
         <Collapse in={isOpen}>
           <Box mt={4}>
-            <NavLink to="/home" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
+            <NavLink to="/" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
               Home
             </NavLink>
             <NavLink to="/product" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>

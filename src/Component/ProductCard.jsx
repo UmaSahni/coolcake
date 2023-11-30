@@ -51,14 +51,14 @@ function ProductCard({ el }) {
   
   const INR_PRICE = price.mrp_inr;  // Taking out price from object because react dom dosen't support object
  
-  // initializing navigate hook for button to go on single edit page
+  // initializing navigate hook to go on single edit page
   const navigate = useNavigate() 
 
    
 
 
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center" onClick={() => navigate(`/product/${id}`)} >
+    <Flex p={50} w="full" alignItems="center" justifyContent="center"  >
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="250"
@@ -73,6 +73,7 @@ function ProductCard({ el }) {
           src={`https://cdn.igp.com/f_auto,q_auto,t_pnopt12prodlp/products/${image}`}
           alt={`Picture of ${name}`}
           roundedTop="lg"
+          onClick={() => navigate(`/product/${id}`)}
         />
 
         <Box p="6">
