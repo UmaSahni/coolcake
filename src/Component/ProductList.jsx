@@ -11,15 +11,17 @@ const ProductList = () => {
   const location = useLocation()
   const dispatch = useDispatch();
   const {products} = useSelector((store)=>store.ProductReducer)
-  let arr = [1,2,3,4,5,6,7,8,9]
+  let arr = [1,2,3,4,5,6]
   console.log(products)
 
   // Last page for Pagination
  const {AllproductCount} = useSelector((store)=>store.ProductReducer)
 
+ // 
+
  const lastPage = Math.ceil(AllproductCount/6)
 
- console.log(lastPage)
+ console.log(lastPage, "This is last page")
   
   let obj = {
     params : {
@@ -32,7 +34,7 @@ const ProductList = () => {
   console.log(location)
   useEffect(() => {
     dispatch(getProduct (obj) )
-    dispatch(getAllProducts)
+    
     console.log(products)
   }, [location.search, page]);
 

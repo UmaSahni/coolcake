@@ -36,7 +36,10 @@ dispatch({type: PRODUCT_LOADING})
 
 axios.get(`${BASE_URL}/products` , data)
 .then((res)=>{
-  dispatch({type:GET_PRODUCT_SUCCESS, payload:res.data})
+  // Accessing the x-total-count header from the response
+      const totalCount = res.headers['x-total-count'];
+
+  dispatch({type:GET_PRODUCT_SUCCESS, payload:res.data, totalCount })
 })
 .catch((err)=>{
   console.log("ERROR IN getProduct", err)
@@ -45,17 +48,3 @@ dispatch({type:PRODUCT_FAILURE})
 })}
 
 
-// GET ALL Product
-
-export const getAllProducts = (dispatch) =>{
-dispatch({type: PRODUCT_LOADING})
-
-axios.get(`${BASE_URL}/products` )
-.then((res)=>{
-  dispatch({type:GET_ALL_PRODUCT_SUCCESS, payload:res.data})
-})
-.catch((err)=>{
-  console.log("ERROR IN getAllProducts action.js", err)
-dispatch({type:PRODUCT_FAILURE})
-
-})}

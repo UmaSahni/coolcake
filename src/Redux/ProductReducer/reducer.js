@@ -7,7 +7,7 @@ const initialState = {
   AllproductCount:0,
   
 };
-export const reducer = (state = initialState, { type, payload }) => {
+export const reducer = (state = initialState, { type, payload, totalCount }) => {
   switch (type) {
     // POST Product
     case PRODUCT_LOADING : {
@@ -21,11 +21,9 @@ export const reducer = (state = initialState, { type, payload }) => {
     }
     // GET Product
     case GET_PRODUCT_SUCCESS : {
-      return {...state, isLoading:false, products:payload}
+      return {...state, isLoading:false, products:payload, AllproductCount:totalCount}
     }
-    case GET_ALL_PRODUCT_SUCCESS :{
-       return {...state, isLoading:false, AllproductCount:payload.length}
-    }
+    
     default:
       return state;
   }
