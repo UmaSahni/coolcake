@@ -10,19 +10,13 @@ import {
   Icon,
   chakra,
   Tooltip,
+  Button,
 } from "@chakra-ui/react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
 
-const data = {
-  isNew: true,
-  imageURL:
-    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80",
-  name: "Wayfarer Classic",
-  price: 4.5,
-  rating: 4.2,
-  numReviews: 34,
-};
+
 
 function Rating({ rating, numReviews }) {
   return (
@@ -53,11 +47,18 @@ function Rating({ rating, numReviews }) {
 }
 
 function ProductCard({ el }) {
-  const { image, quantity, name, price, description, rating, category, review_count, rating_count } = el;
-  const INR_PRICE = price.mrp_inr;
-  // console.log(image);
+  const { image, quantity, name, price, description, rating, category, review_count, rating_count, id } = el;
+  
+  const INR_PRICE = price.mrp_inr;  // Taking out price from object because react dom dosen't support object
+ 
+  // initializing navigate hook for button to go on single edit page
+  const navigate = useNavigate() 
+
+   
+
+
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex p={50} w="full" alignItems="center" justifyContent="center" onClick={() => navigate(`/product/${id}`)} >
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="250"
@@ -66,15 +67,7 @@ function ProductCard({ el }) {
         shadow="lg"
         position="relative"
       >
-        {data.isNew && (
-          <Circle
-            size="10px"
-            position="absolute"
-            top={2}
-            right={2}
-            bg="red.200"
-          />
-        )}
+      
 
         <Image
           src={`https://cdn.igp.com/f_auto,q_auto,t_pnopt12prodlp/products/${image}`}
@@ -83,13 +76,6 @@ function ProductCard({ el }) {
         />
 
         <Box p="6">
-          {/* <Box display="flex" alignItems="baseline">
-            {data.isNew && (
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                New
-              </Badge>
-            )}
-          </Box> */}
 
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -124,6 +110,8 @@ function ProductCard({ el }) {
             </Box>
           </Flex>
         </Box>
+        
+       
       </Box>
     </Flex>
   );

@@ -3,6 +3,8 @@ import { PRODUCT_FAILURE, PRODUCT_LOADING, ADD_PRODUCT_SUCCESS, GET_PRODUCT_SUCC
 import { BASE_URL } from "../../apiEndPoints";
 import toast, { Toaster } from 'react-hot-toast';
 
+// ADD PRODUCT :: POST RESQUEST
+
 export const addProduct = (data) => (dispatch) =>{
   
   dispatch({type:PRODUCT_LOADING})
@@ -28,7 +30,7 @@ export const addProduct = (data) => (dispatch) =>{
   })
 }
 
-
+// GET Product : GET REQUEST 
 export const getProduct = (data) => (dispatch) =>{
 dispatch({type: PRODUCT_LOADING})
 
