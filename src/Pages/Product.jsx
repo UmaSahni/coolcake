@@ -8,11 +8,11 @@ const Product = () => {
     <div>
       <Flex margin={"auto"} justifyContent={"center"} > 
 
-      <Box border={"1px solid red"} >
+      <Box borderRight={"1px solid #7f5539"}  >
       <Sidebar/>
       </Box>
       {/* <Spacer/> */}
-      <Box border={"1px solid green"} >
+      <Box >
        <ProductList/>
       </Box>
      

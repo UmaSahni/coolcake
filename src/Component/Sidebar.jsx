@@ -1,20 +1,16 @@
-import { Box, Checkbox, HStack, Radio, RadioGroup, Text, VStack } from '@chakra-ui/react';
+import { Box, Checkbox, HStack, Radio, RadioGroup, Text, VStack, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-
-
+import { IoFilter } from "react-icons/io5";
 const Sidebar = () => {
-  let [searchParams, setSearchParams] = useSearchParams(); // This is a way were you have variable that you can not skip then you can use undersore
-
-  let [category, setCategory] = useState( searchParams.getAll("category")  || []);
-  let [sort, setSort] = useState(searchParams.get("order"|| ""))
-
-  // console.log(location)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [category, setCategory] = useState(searchParams.getAll("category") || []);
+  const [sort, setSort] = useState(searchParams.get("order" || ""));
 
   const handleChange = (e) => {
     let filterItem = e.target.value;
 
-    // Check if array already has that element. If it has, then {REMOVE} it else {ADD} it
     if (category.includes(filterItem)) {
       setCategory(category.filter((el) => el !== filterItem));
     } else {
@@ -22,24 +18,16 @@ const Sidebar = () => {
     }
   };
 
-  // Sort
-
-  const handleClick = (e) =>{
-    // setSort(e.target.value)
-  }
-
   useEffect(() => {
     let params = { category };
-    // console.log(params, "This is params");
 
-    // Check sort is present or not other wise it will show sort=
-    sort && (params.order = sort)
+    sort && (params.order = sort);
     setSearchParams(params);
   }, [category, sort]);
 
-  return (
-    <div>
-      {/* -----------Filter Functionality---------- */}
+  const renderSidebarContent = () => (
+    <>
+      {/* Filter Functionality */}
       <Box m={10}>
         <Text align={'center'} fontWeight={'bold'}>
           Filter By
@@ -57,17 +45,47 @@ const Sidebar = () => {
         </VStack>
       </Box>
 
-      {/* ----------Sort Functionality------------ */}
+      {/* Sort Functionality */}
       <Box m={10}>
         <Text align={'center'} fontWeight={'bold'}>
           Sort By
         </Text>
-          <RadioGroup onChange={setSort} value={sort} >
-        <VStack  align={'left'}>
-          <Radio name="order" value="asc">Low to high</Radio>
-          <Radio name="order" value="desc">High to low</Radio>
-        </VStack>
-          </RadioGroup>
+        <RadioGroup onChange={setSort} value={sort}>
+          <VStack align={'left'}>
+            <Radio name="order" value="asc">Low to high</Radio>
+            <Radio name="order" value="desc">High to low</Radio>
+          </VStack>
+        </RadioGroup>
+      </Box>
+    </>
+  );
+
+  return (
+    <div>
+      {/* Desktop View */}
+      <Box display={{ base: 'none', xl: 'block' }}>
+        {renderSidebarContent()}
+      </Box>
+
+      {/* Tablet and Mobile View */}
+      <Box  display={{ base: 'block', xl: 'none' }}>
+        <HStack m={5} >
+          <Box onClick={onOpen} cursor="pointer">
+            <Text fontWeight={"bold"} fontSize={"small"} >Filter</Text>
+           <IoFilter size={30} /> 
+          </Box>
+        </HStack>
+        <Drawer     placement="left" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay>
+            <DrawerContent backgroundColor="pink" >
+              <DrawerCloseButton />
+              <DrawerHeader>Filter and Sort</DrawerHeader>
+              <DrawerBody>
+                {renderSidebarContent()}
+              </DrawerBody>
+            </DrawerContent>
+          </DrawerOverlay>
+        </Drawer>
       </Box>
     </div>
   );
