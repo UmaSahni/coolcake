@@ -38,7 +38,7 @@ export default function Login() {
     
     dispatch(login({email, password})).then((res)=>navigate(location.state, {replace:true}))
 
-    console.log(email, password)
+    console.log(email, password, location)
     
   }
 console.log(store)

@@ -40,6 +40,10 @@ const Navbar = () => {
               Product
             </NavLink>
 
+             <NavLink  to="/cart" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+              Cart
+            </NavLink>
+
 
             {/* Add more NavLink components for other pages */}
             <Button colorScheme="whiteAlpha" variant="outline">

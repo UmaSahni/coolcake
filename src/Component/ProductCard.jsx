@@ -15,6 +15,9 @@ import {
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { addCart } from "../Redux/CartReducer/action";
+import { useDispatch, useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
 
 
 
@@ -46,19 +49,53 @@ function Rating({ rating, numReviews }) {
   );
 }
 
+// --------- Main Function Starts from here -------------
+
 function ProductCard({ el }) {
-  const { image, quantity, name, price, description, rating, category, review_count, rating_count, id } = el;
+  const { image, quantity, name, price, description, rating, category, review_count, rating_count, id, sdesc,tagBeforeCutoff,eggless } = el;
   
   const INR_PRICE = price.mrp_inr;  // Taking out price from object because react dom dosen't support object
  
   // initializing navigate hook to go on single edit page
   const navigate = useNavigate() 
 
-   
+  // Some React-Redux hooks
+  const dispatch = useDispatch()
+  const { AuthReducer } = useSelector((store) => store);
 
+  const userData = AuthReducer["data"];
+  const userId = userData["id"]; // Current user Id
+  
+
+  // Add to cart functionality
+ const addtoCart = () => {
+    // Check if the user is Autherized
+    if (!userId) {
+      toast.error(<b>Please Login</b>);
+      return 
+    }
+
+    const main = {
+      category,
+      image,
+      name,
+      eggless,
+      quantity,
+      rating,
+      sdesc,
+      tagBeforeCutoff,
+      price,
+      userId,
+    };
+
+    dispatch(addCart(main));
+  };
 
   return (
+    <>
+    <Toaster/>
     <Flex p={50} w="full" alignItems="center" justifyContent="center"  >
+      
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="250"
@@ -88,6 +125,7 @@ function ProductCard({ el }) {
             >
               {name}
             </Box>
+            <Box onClick={addtoCart} >
             <Tooltip
               label="Add to cart"
               bg="white"
@@ -95,10 +133,11 @@ function ProductCard({ el }) {
               color={"gray.800"}
               fontSize={"1.2em"}
             >
-              <chakra.a href={"#"} display={"flex"}>
-                <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-              </chakra.a>
+              <chakra  display={"flex"}>
+                <Icon  as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
+              </chakra>
             </Tooltip>
+            </Box>
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
@@ -115,6 +154,7 @@ function ProductCard({ el }) {
        
       </Box>
     </Flex>
+    </>
   );
 }
 
