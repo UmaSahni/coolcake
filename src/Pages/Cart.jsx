@@ -17,8 +17,8 @@ import { getCart } from "../Redux/CartReducer/action";
 import CartCard from "../Component/CartCard";
 
 const CartPage = () => {
+  const [total, setTotal] = useState(0)
   
-
   // React-redux hooks
   const dispatch = useDispatch();
   const { CartReducer } = useSelector((store) => store);
@@ -29,10 +29,20 @@ const CartPage = () => {
 
   const cartItem = CartReducer.cart;
 
+
   useEffect(() => {
     dispatch(getCart(userId));
   }, []);
   console.log(CartReducer);
+
+  // Find the total in update it when cartItems changes
+  useEffect(()=>{
+   if(cartItem.length > 0 ) {
+      const sum = cartItem.reduce((acu, crr) => acu + crr.price.mrp_inr, 0);
+      setTotal(sum);
+   }
+  }, [cartItem])
+
   return (
     <Box p={4}>
       <Heading mb={4}>Your Shopping Cart</Heading>
@@ -49,7 +59,7 @@ const CartPage = () => {
       {/* Cart Summary */}
       <Flex justifyContent="flex-end">
         <Box>
-          <Text fontSize="lg">Total: $149.98</Text>
+          <Text fontSize="lg">Total: ${total}</Text>
           <Button mt={4} colorScheme="pink">
             Checkout
           </Button>

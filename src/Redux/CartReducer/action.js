@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 export const addCart = (data) => (dispatch) => {
   dispatch({ type: CART_LOADING });
   // Display loading notification
-  const loadingnoti = toast.loading("...adding");
+  const loadingnoti = toast.loading(<b>adding...</b>);
 
   axios
     .post(`${BASE_URL}/cart`, data)
@@ -56,16 +56,22 @@ export const getCart = (id) => (dispatch) => {
 // Delete from Cart
 
 export const deleteCartItem = (id) => (dispatch) =>{
-  
+  // Display loading notification
+  const loadingnoti = toast.loading( <b> Removing </b>);
+
 dispatch({type:CART_LOADING});
  return axios.delete(`${BASE_URL}/cart/${id}`)
   .then((res)=>{
+    toast.dismiss(loadingnoti)
     console.log(res, "comming from action")
     dispatch({type:REMOVE_SUCCESS})
     
+   
   })
   .catch((err)=>{
     console.log("Error in deleteCartItem", err)
     dispatch({type:CART_FAILURE,})
+     toast.dismiss(loadingnoti)
+     toast.error("Error ouccred, Sorry!")
   })
 }

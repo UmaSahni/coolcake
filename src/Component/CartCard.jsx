@@ -3,6 +3,7 @@ import { Box, Flex, Text, IconButton, Image, Button } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, getCart } from "../Redux/CartReducer/action";
+import { Toaster } from "react-hot-toast";
 
 const CartCard = ({ category, image, name, price, id }) => {
   const INR_PRICE = price && price.mrp_inr;
@@ -17,9 +18,15 @@ const CartCard = ({ category, image, name, price, id }) => {
   // Delete Item from Cart
   const delteItem = (id) => {
     dispatch(deleteCartItem(id))
+     .then(() => {
+        // Dispatch getCart after successful deletion
+        dispatch(getCart(userId));
+      })
   };
 
   return (
+    <>
+    <Toaster/>
     <Box
       boxShadow="base"
       p={4}
@@ -63,6 +70,7 @@ const CartCard = ({ category, image, name, price, id }) => {
         </Flex>
       </Flex>
     </Box>
+    </>
   );
 };
 
