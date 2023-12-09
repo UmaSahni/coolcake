@@ -80,7 +80,7 @@ function ProductCard({ el }) {
       image,
       name,
       eggless,
-      quantity,
+      quantity : 1,
       rating,
       sdesc,
       tagBeforeCutoff,

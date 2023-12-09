@@ -82,7 +82,7 @@ const SingleProduct = () => {
       image,
       name,
       eggless,
-      quantity,
+      quantity : 1,
       rating,
       sdesc,
       tagBeforeCutoff,

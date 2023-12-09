@@ -43,6 +43,10 @@ const CartPage = () => {
    }
   }, [cartItem])
 
+  // Format the total with commas
+  const formattedTotal = new Intl.NumberFormat("en-IN").format(total);
+
+
   return (
     <Box p={4}>
       <Heading mb={4}>Your Shopping Cart</Heading>
@@ -59,7 +63,7 @@ const CartPage = () => {
       {/* Cart Summary */}
       <Flex justifyContent="flex-end">
         <Box>
-          <Text fontSize="lg">Total: ${total}</Text>
+          <Text fontSize="lg">Total: ₹ {formattedTotal}</Text>
           <Button mt={4} colorScheme="pink">
             Checkout
           </Button>
