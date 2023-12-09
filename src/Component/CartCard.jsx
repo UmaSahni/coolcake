@@ -1,11 +1,27 @@
-import React from "react";
-import { Box, Flex, Text, IconButton, Image, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Flex,
+  Text,
+  IconButton,
+  Image,
+  Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, getCart } from "../Redux/CartReducer/action";
+import {
+  deleteCartItem,
+  getCart,
+  updateQuantity,
+} from "../Redux/CartReducer/action";
 import { Toaster } from "react-hot-toast";
 
-const CartCard = ({ category, image, name, price, id }) => {
+const CartCard = ({ category, image, name, price, id, quantity }) => {
   const INR_PRICE = price && price.mrp_inr;
   // react-redux hooks
   const dispatch = useDispatch();
@@ -21,6 +37,18 @@ const CartCard = ({ category, image, name, price, id }) => {
       // Dispatch getCart after successful deletion
       dispatch(getCart(userId));
     });
+  };
+
+  // update quantity
+  const handleChange = (value) => {
+    const obj = { category, image, name, price, id, quantity: +value };
+    dispatch(updateQuantity(obj))
+      .then((res) => {
+        dispatch(getCart(userId));
+      })
+      .catch((err) => {
+        console.log("Error in handleChange function in CartCard.jsx", err);
+      });
   };
 
   return (
@@ -48,14 +76,11 @@ const CartCard = ({ category, image, name, price, id }) => {
             Product Name: {name}
           </Text>
 
-          <Flex direction={{mobile:"column"}} >
+          <Flex direction={{ mobile: "column" }}>
             <Text color="gray.500" mb={2}>
               Category: {category}
             </Text>
-            <Flex 
-            
-            
-            flex="1" justify="flex-end">
+            <Flex flex="1" justify="flex-end">
               <Text>Quantity : </Text>
               <NumberInput
                 ml={{ base: 3, md: 3 }}
@@ -63,8 +88,9 @@ const CartCard = ({ category, image, name, price, id }) => {
                 borderRadius={"10"}
                 size="sm"
                 maxW={20}
-                defaultValue={1}
+                defaultValue={quantity}
                 min={1}
+                onChange={handleChange}
               >
                 <NumberInputField />
                 <NumberInputStepper>

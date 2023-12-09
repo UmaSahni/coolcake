@@ -1,4 +1,4 @@
-import { ADD_CART_SUCCESS, CART_FAILURE, CART_LOADING, GET_CART_SUCCESS, REMOVE_SUCCESS } from "./actionTypes";
+import { ADD_CART_SUCCESS, CART_FAILURE, CART_LOADING, GET_CART_SUCCESS, PATCH_SUCCESS, REMOVE_SUCCESS } from "./actionTypes";
 
 const initialState = {
   isLoading: false,
@@ -28,6 +28,10 @@ export const reducer = (state = initialState, { type, payload  }) => {
 
     // Delete Cart Item
     case REMOVE_SUCCESS :
+      return {...state, isLoading:false}
+
+    // Update quantity in cart
+    case PATCH_SUCCESS :
       return {...state, isLoading:false}
 
     default:

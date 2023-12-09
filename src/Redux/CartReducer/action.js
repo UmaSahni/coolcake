@@ -4,6 +4,7 @@ import {
   CART_FAILURE,
   CART_LOADING,
   GET_CART_SUCCESS,
+  PATCH_SUCCESS,
   REMOVE_SUCCESS,
 } from "../CartReducer/actionTypes";
 import { BASE_URL } from "../../apiEndPoints";
@@ -73,5 +74,19 @@ dispatch({type:CART_LOADING});
     dispatch({type:CART_FAILURE,})
      toast.dismiss(loadingnoti)
      toast.error("Error ouccred, Sorry!")
+  })
+}
+
+
+// Patch Request for Quantity
+
+export const updateQuantity = (data) => (dispatch) =>{
+ const {id} = data
+  dispatch({type:CART_LOADING})
+ return axios.patch(`${BASE_URL}/cart/${id}`,{quantity:data.quantity}).then((re)=>{
+    dispatch({type:PATCH_SUCCESS})
+  }).catch((err)=>{
+    dispatch({type:CART_FAILURE})
+    console.log("ERROR in updateQuantity in cart", err)
   })
 }

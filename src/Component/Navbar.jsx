@@ -13,17 +13,21 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from '@chakra-ui/react'
+import LogoForWeb from './LogoForWeb';
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   return (
-    <Box bg="#7f5539" p={4}>
+    <Box bg="#7f5539" pr={4} pl={4}>
       <Flex alignItems="center">
         <Link to="/" >
-        <Heading color="white" size="md">
+        <Flex alignItems={"center"} justifyContent={"center"} >
+        <LogoForWeb/>
+        <Heading fontFamily={"cursive"} color="white" size="md">
           Cool Cake
         </Heading>
+        </Flex>
         </Link>
         <Spacer />
         {isLargerThan768 ? (

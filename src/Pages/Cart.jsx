@@ -15,6 +15,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../Redux/CartReducer/action";
 import CartCard from "../Component/CartCard";
+import EmptyCart from "../Component/EmptyCart";
 
 const CartPage = () => {
   const [total, setTotal] = useState(0)
@@ -38,7 +39,7 @@ const CartPage = () => {
   // Find the total in update it when cartItems changes
   useEffect(()=>{
    if(cartItem.length > 0 ) {
-      const sum = cartItem.reduce((acu, crr) => acu + crr.price.mrp_inr, 0);
+      const sum = cartItem.reduce((acu, crr) => acu + (crr.price.mrp_inr * crr.quantity), 0);
       setTotal(sum);
    }
   }, [cartItem])
@@ -46,6 +47,9 @@ const CartPage = () => {
   // Format the total with commas
   const formattedTotal = new Intl.NumberFormat("en-IN").format(total);
 
+  if(cartItem.length == 0){
+    return <EmptyCart/>
+  }
 
   return (
     <Box p={4}>
@@ -63,7 +67,7 @@ const CartPage = () => {
       {/* Cart Summary */}
       <Flex justifyContent="flex-end">
         <Box>
-          <Text fontSize="lg">Total: ₹ {formattedTotal}</Text>
+          <Text fontSize="lg"> Total: ₹ {formattedTotal}</Text>
           <Button mt={4} colorScheme="pink">
             Checkout
           </Button>
