@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../Redux/CartReducer/action";
 import CartCard from "../Component/CartCard";
 import EmptyCart from "../Component/EmptyCart";
+import { Link, useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const [total, setTotal] = useState(0)
@@ -29,7 +30,6 @@ const CartPage = () => {
   const userId = userData["id"]; // Current user Id
 
   const cartItem = CartReducer.cart;
-
 
   useEffect(() => {
     dispatch(getCart(userId));
@@ -68,9 +68,13 @@ const CartPage = () => {
       <Flex justifyContent="flex-end">
         <Box>
           <Text fontSize="lg"> Total: ₹ {formattedTotal}</Text>
+         
+          <Link to={"/payment"} >
           <Button mt={4} colorScheme="pink">
             Checkout
           </Button>
+          </Link>
+          
         </Box>
       </Flex>
     </Box>
