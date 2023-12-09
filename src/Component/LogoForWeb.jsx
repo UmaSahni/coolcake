@@ -3,7 +3,7 @@ import React from 'react'
 const LogoForWeb = () => {
   return (
     <div>
-        <lottie-player src="https://lottie.host/f8dd2bfd-0bd7-4418-9473-ae50bf004203/0UFAJ3C0yu.json" background="transperent" speed="2" style={{width: "5rem", height: "5rem"}} loop  autoplay  ></lottie-player>
+        <lottie-player src="https://lottie.host/898e0a44-3847-40dd-9f61-5302b10e2e1c/CZCZZZ77RG.json" background="transperent" speed="0.5" style={{width: "5rem", height: "5rem"}} loop  autoplay  ></lottie-player>
     </div>
   )
 }
