@@ -62,7 +62,7 @@ function ProductCard({ el }) {
   // Some React-Redux hooks
   const dispatch = useDispatch()
   const { AuthReducer } = useSelector((store) => store);
-
+  // Taking out the id
   const userData = AuthReducer["data"];
   const userId = userData["id"]; // Current user Id
   
@@ -93,9 +93,9 @@ function ProductCard({ el }) {
 
   return (
     <>
-    <Toaster/>
+   
     <Flex p={50} w="full" alignItems="center" justifyContent="center"  >
-      
+       <Toaster/>
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="250"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useReducer, useState } from "react";
 import {
   Box,
   Flex,
@@ -10,56 +10,38 @@ import {
   IconButton,
   Divider,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { AiOutlineDelete } from 'react-icons/ai';
+} from "@chakra-ui/react";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../Redux/CartReducer/action";
+import CartCard from "../Component/CartCard";
 
 const CartPage = () => {
+  
+
+  // React-redux hooks
+  const dispatch = useDispatch();
+  const { CartReducer } = useSelector((store) => store);
+  const { AuthReducer } = useSelector((store) => store);
+  // Taking out the id
+  const userData = AuthReducer["data"];
+  const userId = userData["id"]; // Current user Id
+
+  const cartItem = CartReducer.cart;
+
+  useEffect(() => {
+    dispatch(getCart(userId));
+  }, []);
+  console.log(CartReducer);
   return (
     <Box p={4}>
       <Heading mb={4}>Your Shopping Cart</Heading>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
         {/* Cart items */}
-        <Box boxShadow="base" p={4} borderRadius="md">
-          <Flex>
-            <Box flex="1">
-              <Text fontSize="lg">Product Name</Text>
-              <Text color="gray.500">Category: Electronics</Text>
-            </Box>
-            <Spacer />
-            <Box>
-              <Text fontWeight="bold" fontSize="lg">
-                $99.99
-              </Text>
-            </Box>
-          </Flex>
-          <Flex mt={2} align="center">
-            <IconButton icon={<AiOutlineDelete />} colorScheme="red" variant="ghost" />
-            <Spacer />
-            <Text>Quantity: 2</Text>
-          </Flex>
-        </Box>
+        {cartItem.length > 0 &&
+          cartItem.map((el) => <CartCard {...el} key={el.id} /> )}
 
-        {/* Another Cart item */}
-        <Box boxShadow="base" p={4} borderRadius="md">
-          <Flex>
-            <Box flex="1">
-              <Text fontSize="lg">Another Product</Text>
-              <Text color="gray.500">Category: Fashion</Text>
-            </Box>
-            <Spacer />
-            <Box>
-              <Text fontWeight="bold" fontSize="lg">
-                $49.99
-              </Text>
-            </Box>
-          </Flex>
-          <Flex mt={2} align="center">
-            <IconButton icon={<AiOutlineDelete />} colorScheme="red" variant="ghost" />
-            <Spacer />
-            <Text>Quantity: 1</Text>
-          </Flex>
-        </Box>
       </SimpleGrid>
 
       <Divider my={4} />
@@ -68,7 +50,7 @@ const CartPage = () => {
       <Flex justifyContent="flex-end">
         <Box>
           <Text fontSize="lg">Total: $149.98</Text>
-          <Button mt={4} colorScheme="teal">
+          <Button mt={4} colorScheme="pink">
             Checkout
           </Button>
         </Box>

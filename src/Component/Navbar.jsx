@@ -28,19 +28,19 @@ const Navbar = () => {
         <Spacer />
         {isLargerThan768 ? (
           <Box>
-            <NavLink  to="/" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+            <NavLink  to="/" style={{ marginRight: '1rem', color: 'white' }} activeStyle={{ color: 'red' }} >
               Home
             </NavLink>
 
-            <NavLink  to="/admin" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+            <NavLink  to="/admin" style={{ marginRight: '1rem', color: 'white' }} >
               Admin
             </NavLink>
 
-              <NavLink  to="/product" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+              <NavLink  to="/product" style={{ marginRight: '1rem', color: 'white' }} >
               Product
             </NavLink>
 
-             <NavLink  to="/cart" style={{ marginRight: '1rem', color: 'white' }} exact activeStyle={{ color: 'red' }}>
+             <NavLink  to="/cart" style={{ marginRight: '1rem', color: 'white' }} >
               Cart
             </NavLink>
 
@@ -70,10 +70,10 @@ const Navbar = () => {
       {!isLargerThan768 && (
         <Collapse in={isOpen}>
           <Box mt={4}>
-            <NavLink to="/" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
+            <NavLink to="/" style={{ display: 'block', color: 'white' }} >
               Home
             </NavLink>
-            <NavLink to="/product" style={{ display: 'block', color: 'white' }} activeStyle={{ color: 'red' }}>
+            <NavLink to="/product" style={{ display: 'block', color: 'white' }} >
               Product
             </NavLink>
             {/* Add more NavLink components for other pages */}

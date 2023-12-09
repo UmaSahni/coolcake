@@ -1,3 +1,4 @@
+import { Flex, Box } from "@chakra-ui/react";
 import Footer from "./Component/Footer";
 import Navbar from "./Component/Navbar";
 import Home from "./Pages/Home";
@@ -8,7 +9,10 @@ function App() {
     <div>
     <Navbar/>
      <MainRoutes/>
-    <Footer/>
+     
+      <Footer/>
+     
+    
     </div>
   );
 }

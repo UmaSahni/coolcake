@@ -30,3 +30,5 @@ let [_, setSearchParams] = useSearchParams(); // This is a way were you have var
         }
     ]
 }
+
+// https://coolcakebackend.onrender.com/cart?userId=2

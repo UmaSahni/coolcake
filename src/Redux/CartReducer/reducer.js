@@ -1,4 +1,4 @@
-import { ADD_CART_SUCCESS, CART_FAILURE, CART_LOADING } from "./actionTypes";
+import { ADD_CART_SUCCESS, CART_FAILURE, CART_LOADING, GET_CART_SUCCESS, REMOVE_SUCCESS } from "./actionTypes";
 
 const initialState = {
   isLoading: false,
@@ -9,7 +9,7 @@ const initialState = {
   
 };
 export const reducer = (state = initialState, { type, payload  }) => {
-   console.log('Current state:', state); // Log the current state
+   console.log('Current state:', state, payload); // Log the current state
   switch (type) {
     // Comman
     case CART_LOADING:
@@ -22,8 +22,14 @@ export const reducer = (state = initialState, { type, payload  }) => {
     case ADD_CART_SUCCESS:
       return {...state, isLoading:false, cart:payload}
     
+    // Get all the Cart Items
+    case GET_CART_SUCCESS :
+      return {...state, isLoading:false, cart:payload, cartItem:payload.length}
 
-    
+    // Delete Cart Item
+    case REMOVE_SUCCESS :
+      return {...state, isLoading:false}
+
     default:
       return state;
   }
